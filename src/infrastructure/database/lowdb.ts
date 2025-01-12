@@ -1,6 +1,6 @@
 import { Low } from "lowdb/lib";
 import { JSONFilePreset } from "lowdb/node";
-import { Product } from "../../products/models/product.model";
+import { Product } from "../../products/models/get-product.model";
 
 const DB_FILE_NAME = process.env.DB_FILE_NAME || "db.json";
 
@@ -10,7 +10,7 @@ export interface DatabaseSchema {
 
 const baseData: DatabaseSchema = { products: [] };
 
-export class LowdbService {
+export class LowDb {
     private static instance: Low<DatabaseSchema>;
 
     private constructor() {}
