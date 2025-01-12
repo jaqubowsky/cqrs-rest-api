@@ -1,0 +1,44 @@
+{
+  "name": "cqrs-rest-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start:prod": "node dist/index.js",
+    "start:dev": "ts-node src/index.ts",
+    "prepare": "husky",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,js,json}": [
+      "eslint . --fix",
+      "prettier --ignore-path .gitignore --write \"./src/**/*.+(js|ts|json)\""
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaqubowsky/cqrs-rest-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jaqubowsky/cqrs-rest-api/issues"
+  },
+  "homepage": "https://github.com/jaqubowsky/cqrs-rest-api#readme",
+  "description": "",
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.18.0",
+    "@types/node": "^22.10.5",
+    "@typescript-eslint/eslint-plugin": "^8.19.1",
+    "@typescript-eslint/parser": "^8.19.1",
+    "eslint": "^9.18.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.3.0",
+    "prettier": "^3.4.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
