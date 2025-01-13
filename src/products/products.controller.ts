@@ -24,7 +24,7 @@ export async function createProduct(req: Request, res: Response) {
     const { name, description, price, stock } = req.body;
 
     const result = createProductSchema.safeParse(req.body);
-    if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error);
+    if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error.issues);
 
     const newProduct = new CreateProductCommand(name, description, price, stock);
 
@@ -39,7 +39,7 @@ export async function restockProduct(req: Request, res: Response) {
     const { restockQuantity } = req.body;
 
     const result = restockProductSchema.safeParse(req.body);
-    if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error);
+    if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error.issues);
 
     const data = new RestockProductCommand(productId, restockQuantity);
 
@@ -54,7 +54,7 @@ export async function sellProduct(req: Request, res: Response) {
     const { sellQuantity } = req.body;
 
     const result = sellProductSchema.safeParse(req.body);
-    if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error);
+    if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error.issues);
 
     const data = new SellProductCommand(productId, sellQuantity);
 
