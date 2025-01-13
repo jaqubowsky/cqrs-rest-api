@@ -21,10 +21,3 @@ export class ExposedError extends CustomError {
         this.expose = true;
     }
 }
-
-export class InternalError extends CustomError {
-    constructor(res: { status: number; message: string }, details: any | null = null) {
-        super(res, details);
-        this.expose = false;
-    }
-}
