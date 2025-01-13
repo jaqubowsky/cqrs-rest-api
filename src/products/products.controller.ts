@@ -21,11 +21,10 @@ export async function getProducts(req: Request, res: Response) {
 }
 
 export async function createProduct(req: Request, res: Response) {
-    const { name, description, price, stock } = req.body;
-
     const result = createProductSchema.safeParse(req.body);
     if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error.issues);
 
+    const { name, description, price, stock } = req.body;
     const newProduct = new CreateProductCommand(name, description, price, stock);
 
     const createProductHandler = new CreateProductHandler(productsRepository);
@@ -35,12 +34,10 @@ export async function createProduct(req: Request, res: Response) {
 }
 
 export async function restockProduct(req: Request, res: Response) {
-    const { id: productId } = req.params;
-    const { restockQuantity } = req.body;
-
-    const result = restockProductSchema.safeParse(req.body);
+    const result = restockProductSchema.safeParse({ ...req.body, id: req.params.id });
     if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error.issues);
 
+    const { productId, restockQuantity } = result.data;
     const data = new RestockProductCommand(productId, restockQuantity);
 
     const restockProductHandler = new RestockProductHandler(productsRepository);
@@ -50,12 +47,10 @@ export async function restockProduct(req: Request, res: Response) {
 }
 
 export async function sellProduct(req: Request, res: Response) {
-    const { id: productId } = req.params;
-    const { sellQuantity } = req.body;
-
-    const result = sellProductSchema.safeParse(req.body);
+    const result = sellProductSchema.safeParse({ ...req.body, id: req.params.id });
     if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error.issues);
 
+    const { productId, sellQuantity } = result.data;
     const data = new SellProductCommand(productId, sellQuantity);
 
     const sellProductHandler = new SellProductHandler(productsRepository);
