@@ -9,7 +9,7 @@ export async function getProducts(req: Request, res: Response) {
     const getProductsHandler = new GetProductsHandler(productsRepository);
     const products = await getProductsHandler.execute();
 
-    res.json({ data: products });
+    res.json({ data: { products } });
 }
 
 export async function createProduct(req: Request, res: Response) {
@@ -35,7 +35,7 @@ export async function restockProduct(req: Request, res: Response) {
     const restockProductHandler = new RestockProductHandler(productsRepository);
     const { stock } = await restockProductHandler.execute({ productId, restockQuantity });
 
-    res.json({ data: { stock, productId } });
+    res.json({ data: { stock, id: productId } });
 }
 
 export async function sellProduct(req: Request, res: Response) {
@@ -45,5 +45,5 @@ export async function sellProduct(req: Request, res: Response) {
     const sellProductHandler = new SellProductHandler(productsRepository);
     const { stock } = await sellProductHandler.execute({ productId, quantityToSell });
 
-    res.json({ data: { stock, productId } });
+    res.json({ data: { stock, id: productId } });
 }
