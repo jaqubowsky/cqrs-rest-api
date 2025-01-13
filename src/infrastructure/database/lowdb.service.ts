@@ -43,6 +43,8 @@ export class LowdbService implements DatabaseService {
 
     async createOrder(order: Order): Promise<string> {
         this.db.data.orders.push(order);
+        this.db.write();
+
         return order.id;
     }
 }
