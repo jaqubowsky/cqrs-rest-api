@@ -8,7 +8,7 @@ export class GetProductsHandler {
         this.productsRepository = productsRepository;
     }
 
-    async handle(): Promise<Product[]> {
+    async execute(): Promise<Product[]> {
         return this.productsRepository.getProducts();
     }
 }
