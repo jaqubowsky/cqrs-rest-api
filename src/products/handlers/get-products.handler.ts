@@ -1,5 +1,5 @@
 import { ProductsRepository } from "../../infrastructure/repositories/products.repository";
-import { Product } from "../models/get-product.model";
+import { Product } from "../models/get-products.model";
 
 export class GetProductsHandler {
     private productsRepository: ProductsRepository;

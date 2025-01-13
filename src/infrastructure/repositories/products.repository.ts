@@ -1,4 +1,4 @@
-import { Product } from "../../products/models/get-product.model";
+import { Product } from "../../products/models/get-products.model";
 import { DatabaseService } from "../models/database-service.model";
 
 export class ProductsRepository {
@@ -10,5 +10,9 @@ export class ProductsRepository {
 
     async getProducts(): Promise<Product[]> {
         return this.dbService.getProducts();
+    }
+
+    async addProduct(product: Product): Promise<string> {
+        return this.dbService.addProduct(product);
     }
 }

@@ -1,6 +1,6 @@
 import { Low } from "lowdb/lib";
 import { JSONFilePreset } from "lowdb/node";
-import { Product } from "../../products/models/get-product.model";
+import { Product } from "../../products/models/get-products.model";
 
 const DB_FILE_NAME = process.env.DB_FILE_NAME || "db.json";
 
