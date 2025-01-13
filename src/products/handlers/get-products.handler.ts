@@ -1,5 +1,5 @@
 import { ProductsRepository } from "../../infrastructure/repositories/products.repository";
-import { Product } from "../models/get-products.model";
+import { GetProduct } from "../models/get-products.model";
 
 export class GetProductsHandler {
     private productsRepository: ProductsRepository;
@@ -8,7 +8,7 @@ export class GetProductsHandler {
         this.productsRepository = productsRepository;
     }
 
-    async execute(): Promise<Product[]> {
+    async execute(): Promise<GetProduct[]> {
         return this.productsRepository.getProducts();
     }
 }

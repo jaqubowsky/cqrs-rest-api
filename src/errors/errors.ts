@@ -1,24 +1,30 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { StatusCodes } from "./http-error-codes";
 
 export class CustomError extends Error {
     status: number;
     expose: boolean;
+    details: any | null;
 
-    constructor(status = StatusCodes.INTERNAL_SERVER_ERROR, message = "Internal Server Error", expose = false) {
-        super(message);
-        this.status = status;
-        this.expose = expose;
+    constructor(res: { status: number; message: string }, details: any = null) {
+        super(res.message);
+        this.status = res.status || StatusCodes.INTERNAL_SERVER_ERROR;
+        this.expose = false;
+        this.details = details;
     }
 }
 
 export class ExposedError extends CustomError {
-    constructor(status: number, message: string) {
-        super(status, message, true);
+    constructor(res: { status: number; message: string }, details: any | null = null) {
+        super(res, details);
+        this.expose = true;
     }
 }
 
 export class InternalError extends CustomError {
-    constructor(status: number, message: string) {
-        super(status, message, false);
+    constructor(res: { status: number; message: string }, details: any | null = null) {
+        super(res, details);
+        this.expose = false;
     }
 }

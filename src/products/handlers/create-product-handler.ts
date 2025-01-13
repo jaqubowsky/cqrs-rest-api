@@ -16,6 +16,6 @@ export class CreateProductHandler {
             stock,
         };
 
-        return await this.productRepository.addProduct(newProduct);
+        return await this.productRepository.createProduct(newProduct);
     }
 }

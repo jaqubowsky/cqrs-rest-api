@@ -1,5 +1,6 @@
 import { Low } from "lowdb/lib";
-import { Product } from "../../products/models/get-products.model";
+import { CreateProductWithId } from "../../products/models/create-product.model";
+import { GetProduct } from "../../products/models/get-products.model";
 import { UpdateProduct } from "../../products/models/update-product.model";
 import { DatabaseService } from "../models/database-service.model";
 import { DatabaseSchema, LowDb } from "./lowdb";
@@ -11,17 +12,17 @@ export class LowdbService implements DatabaseService {
         Promise.resolve(LowDb.getInstance()).then((db) => (this.db = db));
     }
 
-    async getProducts(): Promise<Product[]> {
+    async getProducts(): Promise<GetProduct[]> {
         return this.db.data.products;
     }
 
-    async addProduct(product: Product): Promise<string> {
+    async createProduct(product: CreateProductWithId): Promise<string> {
         this.db.data.products.push(product);
         this.db.write();
         return product.id;
     }
 
-    async getProductById(productId: string): Promise<Product | undefined> {
+    async getProductById(productId: string): Promise<GetProduct | undefined> {
         return this.db.data.products.find((product) => product.id === productId);
     }
 

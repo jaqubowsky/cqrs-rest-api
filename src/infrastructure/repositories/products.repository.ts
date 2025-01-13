@@ -1,4 +1,5 @@
-import { Product } from "../../products/models/get-products.model";
+import { CreateProductWithId } from "../../products/models/create-product.model";
+import { GetProduct } from "../../products/models/get-products.model";
 import { UpdateProduct } from "../../products/models/update-product.model";
 import { DatabaseService } from "../models/database-service.model";
 
@@ -9,11 +10,11 @@ export class ProductsRepository {
         this.dbService = dbService;
     }
 
-    async getProducts(): Promise<Product[]> {
+    async getProducts(): Promise<GetProduct[]> {
         return this.dbService.getProducts();
     }
 
-    async getProductById(productId: string): Promise<Product | undefined> {
+    async getProductById(productId: string): Promise<GetProduct | undefined> {
         return this.dbService.getProductById(productId);
     }
 
@@ -21,7 +22,7 @@ export class ProductsRepository {
         return this.dbService.updateProduct(productId, data);
     }
 
-    async addProduct(product: Product): Promise<string> {
-        return this.dbService.addProduct(product);
+    async createProduct(product: CreateProductWithId): Promise<string> {
+        return this.dbService.createProduct(product);
     }
 }

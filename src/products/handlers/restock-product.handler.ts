@@ -1,6 +1,6 @@
 import { ExposedError } from "../../errors/errors";
-import { StatusCodes } from "../../errors/http-error-codes";
 import { ProductsRepository } from "../../infrastructure/repositories/products.repository";
+import { ResErr } from "../../responses";
 import { RestockProductCommand } from "../commands/restock.product.command";
 
 export class RestockProductHandler {
@@ -12,7 +12,7 @@ export class RestockProductHandler {
 
     async execute(command: RestockProductCommand): Promise<{ stock: number; productId: string }> {
         const product = await this.productsRepository.getProductById(command.productId);
-        if (!product) throw new ExposedError(StatusCodes.NOT_FOUND, "Product not found");
+        if (!product) throw new ExposedError(ResErr.NOT_FOUND);
 
         const newStock = product.stock + command.restockQuantity;
 
