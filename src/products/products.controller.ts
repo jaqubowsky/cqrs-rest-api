@@ -34,7 +34,7 @@ export async function createProduct(req: Request, res: Response) {
 }
 
 export async function restockProduct(req: Request, res: Response) {
-    const result = restockProductSchema.safeParse({ ...req.body, id: req.params.id });
+    const result = restockProductSchema.safeParse({ ...req.body, productId: req.params.id });
     if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error.issues);
 
     const { productId, restockQuantity } = result.data;
@@ -47,7 +47,7 @@ export async function restockProduct(req: Request, res: Response) {
 }
 
 export async function sellProduct(req: Request, res: Response) {
-    const result = sellProductSchema.safeParse({ ...req.body, id: req.params.id });
+    const result = sellProductSchema.safeParse({ ...req.body, productId: req.params.id });
     if (!result.success) throw new ExposedError(ResErr.INVALID_BODY, result.error.issues);
 
     const { productId, sellQuantity } = result.data;
