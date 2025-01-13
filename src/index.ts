@@ -1,5 +1,6 @@
 import express from "express";
 import v1Router from "./routes/v1.router";
+import { errorHandler } from "./middlewares/error-middleware";
 
 export const app = express();
 
@@ -10,3 +11,5 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1", v1Router);
+
+app.use(errorHandler);
