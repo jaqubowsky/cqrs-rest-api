@@ -20,6 +20,8 @@ export class LowdbService implements DatabaseService {
     }
 
     async createProduct(product: CreateProductWithId): Promise<string> {
+        if (!this.db.data.products) this.db.data.products = [];
+
         this.db.data.products.push(product);
         this.db.write();
         return product.id;
@@ -42,6 +44,8 @@ export class LowdbService implements DatabaseService {
     }
 
     async createOrder(order: Order): Promise<string> {
+        if (!this.db.data.orders) this.db.data.orders = [];
+
         this.db.data.orders.push(order);
         this.db.write();
 

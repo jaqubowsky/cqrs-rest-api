@@ -13,7 +13,9 @@ export class SellProductHandler {
     async execute(command: SellProductCommand): Promise<{ stock: number; productId: string }> {
         const product = await this.productsRepository.getProductById(command.productId);
         if (!product) throw new ExposedError(ResErr.NOT_FOUND);
-        if (product.stock < command.sellQuantity) throw new ExposedError(ResErr.INSUFFICIENT_STOCK);
+        if (product.stock < command.sellQuantity) {
+            throw new ExposedError(ResErr.INSUFFICIENT_STOCK, { productId: command.productId });
+        }
 
         const newStock = product.stock - command.sellQuantity;
 
